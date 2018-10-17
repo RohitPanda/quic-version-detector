@@ -43,19 +43,19 @@ class UdpHandler:
         self.transport.close()
 
     def error_received(self, transport) -> None:
-        print('Error received:', transport)
+        print('{},Error received:{}'.format(self.target_hostname, transport))
+        self.transport.close()
 
     def connection_lost(self, transport) -> None:
         loop = asyncio.get_event_loop()
         loop.stop()
 
 
-def stop_event_loop(event_loop, timeout: float) -> None:
+def stop_event_loop(target_hostname, event_loop, timeout: float) -> None:
     """Terminates event loop after the specified timeout."""
     def timeout_handler():
         event_loop.stop()
-
-        print('Timeout\nExiting...')
+        print('{},None'.format(target_hostname))
     event_loop.call_later(timeout, timeout_handler)
 
 
@@ -73,7 +73,7 @@ def main() -> None:
     )
     event_loop.run_until_complete(connect)
 
-    stop_event_loop(event_loop, 10)
+    stop_event_loop(args.host, event_loop, 5)
     event_loop.run_forever()
 
 
