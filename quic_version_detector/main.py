@@ -14,9 +14,10 @@ def print_results(
         port: queried port.
         version_negotation_packet: received packet.
     """
-    print('"{}:{}" supported versions:'.format(host, port))
+    print('{}'.format(host), end='')
     for version in version_negotiation_packet.supported_versions:
-        print('    ', version)
+        print(',{}'.format(version), end='')
+    print()
 
 
 class UdpHandler:
