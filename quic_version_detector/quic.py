@@ -61,4 +61,4 @@ def dummy_version_packet() -> Packet:
     connection_id = bytes([random.getrandbits(8) for _ in range(8)])
     return Packet(public_flags=bytes.fromhex('0d'),
                   connection_id=connection_id,
-                  version=bytes.fromhex('0a0a0a0a'))
+                  version=bytes.fromhex('51303938'))
